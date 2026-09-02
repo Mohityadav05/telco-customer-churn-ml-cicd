@@ -12,6 +12,7 @@ Architecture:
 """
 
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 import gradio as gr
 from src.serving.inference import predict  # Core ML inference logic
@@ -27,10 +28,7 @@ app = FastAPI(
 # CRITICAL: Required for AWS Application Load Balancer health checks
 @app.get("/")
 def root():
-    """
-    Health check endpoint for monitoring and load balancer health checks.
-    """
-    return {"status": "ok"}
+    return RedirectResponse(url="/ui/")
 
 @app.get("/health")
 def health():
