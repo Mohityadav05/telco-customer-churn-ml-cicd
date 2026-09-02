@@ -32,6 +32,10 @@ def root():
     """
     return {"status": "ok"}
 
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
 # === REQUEST DATA SCHEMA ===
 # Pydantic model for automatic validation and API documentation
 class CustomerData(BaseModel):
